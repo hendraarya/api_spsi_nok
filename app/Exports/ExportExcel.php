@@ -16,7 +16,7 @@ class ExportExcel implements FromView
 
     public function view(): View
     {
-        return view('exports.parts')->with([
+        return view('exports.member')->with([
             'data' => $this->data
         ]);
     }

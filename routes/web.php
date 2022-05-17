@@ -20,3 +20,5 @@ $router->get('/', function () use ($router) {
 $router->get('/test',  function () {
     echo "success";
 });
+$router->get('/exportmemberexcel', 'EmployeeSpsiExcelController@exportMemberspsiExcel');
+$router->post('/import-data-member', 'EmployeeSpsiExcelController@importDataMemberExcel');
