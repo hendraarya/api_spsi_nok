@@ -36,18 +36,25 @@ class EmployeeSpsiExcelController extends Controller
             {
                 if($type == 'insertdatamember')
                 {
-                    DB::table('employee_spsi2')->insert([
+                    date_default_timezone_set('UTC');
+                    // $date = $member['resign_date'];
+                    // $convert = str_replace('/','-',$date);
+                    // $result = date('Y-m-d', strtotime($convert));
+                    $date1 = strtr( $member['resign_date'],'/','-');
+                    $result = date('Y-m-d', strtotime($date1));
+                    DB::table('employee_spsi')->insert([
                         'employee_no' => $member['employee_no'],
                         'employee_name' => $member['employee_name'],
-                        'resign_date' => $member['resign_date'],
+                        'resign_date' => $result,
                         'departement' => $member['departement'],
                         'section' => $member['section'],
                         'gender' => $member['jenis_kelamin'],
-                        'join_date' => $member['tgl_masuk'],
+                        'join_date' => $member['tanggal_masuk'],
                         'group_code' => $member['kode_golongan'],
                         'employee_position' => $member['jabatan'],
                         'shift' => $member['shift'],
                     ]);
+                   
                 }
                 else if($type == 'updatedatamember')
                 {
@@ -56,11 +63,11 @@ class EmployeeSpsiExcelController extends Controller
                     ->update([
                         //set value yang diupdate
                         'employee_name' => $member['employee_name'],
-                        'resign_date' => $member['resign_date'],
+                        'resign_date' => date('Y-m-d', strtotime($member['resign_date'])),
                         'departement' => $member['departement'],
                         'section' => $member['section'],
                         'gender' => $member['jenis_kelamin'],
-                        'join_date' => $member['tgl.masuk'],
+                        'join_date' => date('Y-m-d', strtotime($member['tgl_masuk'])),
                         'group_code' => $member['kode_golongan'],
                         'employee_position' => $member['jabatan'],
                         'shift' => $member['shift'],
