@@ -22,3 +22,9 @@ $router->get('/test',  function () {
 });
 $router->get('/exportmemberexcel', 'EmployeeSpsiExcelController@exportMemberspsiExcel');
 $router->post('/import-data-member', 'EmployeeSpsiExcelController@importDataMemberExcel');
+$router->get('/login', function (Request $request) {
+    $token = app('auth')->attempt($request->only('email', 'password'));
+ 
+    return response()->json(compact('token'));
+});
+$router->post('/register-user','Auth\LoginController@register_user');
